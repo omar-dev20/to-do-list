@@ -34,35 +34,6 @@ function App() {
   const handleDeleteTask = (id: number) => {
     setTasks(tasks.filter((task) => task.id !== id));
   };
-  if ("serviceWorker" in navigator) {
-      navigator.serviceWorker
-        .register("/sw.js")
-        .then(() => console.log("Service Worker Registered"))
-        .catch((err) =>
-          console.log("Service Worker Registration Failed, Error: ", err),
-        );
-  }
-  function setAlaram(second: number) {
-    Notification.requestPermission().then((permission) => {
-      if (permission === "granted") {
-        Notification.requestPermission().then((permission) => {
-          if (permission === "granted") {
-            if (navigator.serviceWorker.controller) {
-              navigator.serviceWorker.controller.postMessage({
-                action: "set_Alaram",
-                delay:second * 1000,
-              })
-               alert('تم تعيين المهمة بنجاح!')
-            }
-          }
-          else {
-            alert('لم يتم تعيين المهمة بسبب عدم الوصول إلى خادم الخدمة!')
-          }
-        });
-      }
-    });
-  }
-  setAlaram(10)
   return (
     <>
       <div className="container">
